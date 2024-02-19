@@ -34,6 +34,8 @@ label_title = tk.Label(text="Enter the length of sides", font=("Arial", 20), bg=
 label_title.pack(pady=20)
 label_title.place(x=20,y=20)
 
+label_test = tk.Label(text="Hello world", font=("Arial", 20), bg='#D6D7EC')
+
 # สร้าง Label สำหรับ "Side 1"
 label_side1 = tk.Label(text="Side 1", font=("Arial", 20), bg='#D6D7EC')
 label_side1.place(x=20, y=60)
