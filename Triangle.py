@@ -2,81 +2,70 @@ import tkinter as tk
 
 def calculate_triangle_type():
   # รับค่าความยาวด้านจาก Entry widget
-  side_a = float(entry_side1.get())
-  side_b = float(entry_side2.get())
-  side_c = float(entry_side3.get())
+  side_1 = float(entry_side1.get())
+  side_2 = float(entry_side2.get())
+  side_3 = float(entry_side3.get())
 
-  # คำนวณประเภทสามเหลี่ยม
+  # Triangle Type
   triangle_type = " Not a triangle"
-  if side_a + side_b > side_c and side_a + side_c > side_b and side_b + side_c > side_a:
-    if side_a == side_b and side_b == side_c:
+  if side_1 + side_2 > side_3 and side_1 + side_3 > side_2 and side_2 + side_3 > side_1:
+    if side_1 == side_2 == side_3:
       triangle_type = " Equilateral triangle"
-    elif side_a == side_b or side_a == side_c or side_b == side_c:
+    elif side_1 == side_2 or side_1 == side_3 or side_2 == side_3:
       triangle_type = " Isosceles triangle"
+    elif pow(side_1,2) + pow(side_2,2) == pow(side_3,2) or pow(side_1,2) + pow(side_3,2) == pow(side_2,2) or pow(side_3,2) + pow(side_2,2) == pow(side_1,2):
+      triangle_type = " Right Triangle"
     else:
       triangle_type = " Scalene triangle"
+  else:
+    triangle_type = " Not a Triangle."
 
-  # แสดงผลลัพธ์ใน Entry widget
+  # show result in Entry widget
   entry_result.delete(0, tk.END)
   entry_result.insert(40, triangle_type)
 
-
-# กำหนดขนาดหน้าต่างและสีพื้นหลัง
+# -------------------- GUI Interface -------------------- #
 root = tk.Tk()
 root.geometry("490x320")
 root.configure(bg='#D6D7EC')
-
-# กำหนดชื่อโปรแกรม
 root.title("Triangle")
 
-# สร้าง Label สำหรับข้อความ "Enter the length of sides"
+# "Enter the length of sides" Label
 label_title = tk.Label(text="Enter the length of sides", font=("Arial", 20), bg='#D6D7EC')
 label_title.pack(pady=20)
 label_title.place(x=20,y=20)
 
-label_test = tk.Label(text="Hello world", font=("Arial", 20), bg='#D6D7EC')
-
-# สร้าง Label สำหรับ "Side 1"
+# "Side 1" Label
 label_side1 = tk.Label(text="Side 1", font=("Arial", 20), bg='#D6D7EC')
 label_side1.place(x=20, y=60)
-
-# สร้าง Entry widget สำหรับรับค่า Side 1
+# "Side 1" Entry widget
 entry_side1 = tk.Entry(width=28, font=18, bg='#CDCC03')
 entry_side1.place(x=160, y=65)
 
-#---------------------------------------------------------------------------------#
-
-# สร้าง Label สำหรับ "Side 2"
+# "Side 2" Label
 label_side2 = tk.Label(text="Side 2", font=("Arial", 20), bg='#D6D7EC')
 label_side2.place(x=20, y=100)
-
-# สร้าง Entry widget สำหรับรับค่า Side 2
+# "Side 2" Entry widget
 entry_side2 = tk.Entry(width=28, font=18, bg='#CDCC03')
 entry_side2.place(x=160, y=105)
 
-#---------------------------------------------------------------------------------#
-
-# สร้าง Label สำหรับ "Side 3"
+# Side 3" Label
 label_side3 = tk.Label(text="Side 3", font=("Arial", 20), bg='#D6D7EC')
 label_side3.place(x=20, y=140)
-
-# สร้าง Entry widget สำหรับรับค่า Side 3
+# "Side 3" Entry widget
 entry_side3 = tk.Entry(width=28, font=18, bg='#CDCC03')
 entry_side3.place(x=160, y=145)
 
-#---------------------------------------------------------------------------------#
-
-# สร้าง Label สำหรับแสดงผลลัพธ์
+# Label "Result"
 label_result = tk.Label(text="Result", font=("Arial", 20), bg='#D6D7EC')
 label_result.place(x=265, y=200)
 
-# สร้างปุ่มสำหรับคำนวณ
+# Enter butt
 button_calculate = tk.Button(text="Enter", font=("Arial", 17), bg='#CDCC03', command = calculate_triangle_type)
 button_calculate.place(x=20, y=250)
 
-# สร้าง Entry widget สำหรับแสดงชนิดของสามเหลี่ยม
+# Entry widget "Result"
 entry_result = tk.Entry(width=28, font=18, bg='#CDCC03')
 entry_result.place(x=160, y=260)
 
-# รันโปรแกรม
 root.mainloop()
