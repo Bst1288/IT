@@ -1,28 +1,36 @@
 import tkinter as tk
 
 def calculate_triangle_type():
-  # รับค่าความยาวด้านจาก Entry widget
-  side_1 = float(entry_side1.get())
-  side_2 = float(entry_side2.get())
-  side_3 = float(entry_side3.get())
+  try:
+    side_1 = int(entry_side1.get())
+    side_2 = int(entry_side2.get())
+    side_3 = int(entry_side3.get())
+    # check input
+    if 0 <= side_1 <= 999999 and 0 <= side_2 <= 999999 and 0 <= side_3 <= 999999:
+      # Triangle Type
+      if side_1 + side_2 > side_3 and side_1 + side_3 > side_2 and side_2 + side_3 > side_1:
+        if side_1 == side_2 == side_3:
+          triangle_type = " Equilateral triangle"
+        elif side_1 == side_2 or side_1 == side_3 or side_2 == side_3:
+          triangle_type = " Isosceles triangle"
+        elif pow(side_1,2) + pow(side_2,2) == pow(side_3,2) or pow(side_1,2) + pow(side_3,2) == pow(side_2,2) or pow(side_3,2) + pow(side_2,2) == pow(side_1,2):
+          triangle_type = " Right Triangle"
+        else:
+          triangle_type = " Scalene triangle"
+      else:
+        triangle_type = " Not a Triangle"
 
-  # Triangle Type
-  triangle_type = " Not a triangle"
-  if side_1 + side_2 > side_3 and side_1 + side_3 > side_2 and side_2 + side_3 > side_1:
-    if side_1 == side_2 == side_3:
-      triangle_type = " Equilateral triangle"
-    elif side_1 == side_2 or side_1 == side_3 or side_2 == side_3:
-      triangle_type = " Isosceles triangle"
-    elif pow(side_1,2) + pow(side_2,2) == pow(side_3,2) or pow(side_1,2) + pow(side_3,2) == pow(side_2,2) or pow(side_3,2) + pow(side_2,2) == pow(side_1,2):
-      triangle_type = " Right Triangle"
+      # show result in Entry widget
+      entry_result.delete(0, tk.END)
+      entry_result.insert(40, triangle_type)
     else:
-      triangle_type = " Scalene triangle"
-  else:
-    triangle_type = " Not a Triangle."
-
-  # show result in Entry widget
-  entry_result.delete(0, tk.END)
-  entry_result.insert(40, triangle_type)
+      error_message = "Please enter positive integers between 0 and 999999"
+      entry_result.delete(0, tk.END)
+      entry_result.insert(40, error_message)
+  except:
+    error_message = "Error! Please enter valid integers"
+    entry_result.delete(0, tk.END)
+    entry_result.insert(40, error_message)
 
 # -------------------- GUI Interface -------------------- #
 root = tk.Tk()
