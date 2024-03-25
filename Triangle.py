@@ -1,13 +1,6 @@
 import tkinter as tk
-
-def calculate_triangle_type():
-  try:
-    side_1 = int(entry_side1.get())
-    side_2 = int(entry_side2.get())
-    side_3 = int(entry_side3.get())
-    # check input
-    if 0 <= side_1 <= 999999 and 0 <= side_2 <= 999999 and 0 <= side_3 <= 999999:
-      # Triangle Type
+# Triangle Type
+def triangle_type(side_1, side_2, side_3):
       if side_1 + side_2 > side_3 and side_1 + side_3 > side_2 and side_2 + side_3 > side_1:
         if side_1 == side_2 == side_3:
           triangle_type = " Equilateral triangle"
@@ -19,24 +12,34 @@ def calculate_triangle_type():
           triangle_type = " Scalene triangle"
       else:
         triangle_type = " Not a Triangle"
+      return triangle_type
 
+def triangle_type_output():
+  try:
+    side_1 = int(entry_side1.get())
+    side_2 = int(entry_side2.get())
+    side_3 = int(entry_side3.get())
+
+    # check input side is between 0 - 999999
+    if 0 <= side_1 <= 999999 and 0 <= side_2 <= 999999 and 0 <= side_3 <= 999999:
       # show result in Entry widget
       entry_result.delete(0, tk.END)
-      entry_result.insert(40, triangle_type)
+      entry_result.insert(40, triangle_type(side_1, side_2, side_3))
     else:
-      error_message = "Please enter positive integers between 0 and 999999"
+      error_message = "Please enter positive integers between 0 and 999999" # error if input isn't 0 - 999999
       entry_result.delete(0, tk.END)
       entry_result.insert(40, error_message)
+
   except:
-    error_message = "Error! Please enter valid integers"
+    error_message = "Error! Please enter valid integers" # error if input isn't integer
     entry_result.delete(0, tk.END)
     entry_result.insert(40, error_message)
 
-# -------------------- GUI Interface -------------------- #
+# -------------------- Interface -------------------- #
 root = tk.Tk()
 root.geometry("490x320")
 root.configure(bg='#D6D7EC')
-root.title("Triangle")
+root.title("Triangle Type")
 
 # "Enter the length of sides" Label
 label_title = tk.Label(text="Enter the length of sides", font=("Arial", 20), bg='#D6D7EC')
@@ -69,7 +72,7 @@ label_result = tk.Label(text="Result", font=("Arial", 20), bg='#D6D7EC')
 label_result.place(x=265, y=200)
 
 # Enter butt
-button_calculate = tk.Button(text="Enter", font=("Arial", 17), bg='#CDCC03', command = calculate_triangle_type)
+button_calculate = tk.Button(text="Enter", font=("Arial", 17), bg='#CDCC03', command = triangle_type_output)
 button_calculate.place(x=20, y=250)
 
 # Entry widget "Result"
