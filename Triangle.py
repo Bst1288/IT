@@ -1,4 +1,5 @@
 import tkinter as tk
+
 # Triangle Type
 def triangle_type(side_1, side_2, side_3):
       if side_1 + side_2 > side_3 and side_1 + side_3 > side_2 and side_2 + side_3 > side_1:
@@ -11,7 +12,7 @@ def triangle_type(side_1, side_2, side_3):
         else:
           triangle_type = " Scalene triangle"
       else:
-        triangle_type = " Not a Triangle"
+        triangle_type = " Invalid triangle"
       return triangle_type
 
 def triangle_type_output():
@@ -21,17 +22,24 @@ def triangle_type_output():
     side_3 = int(entry_side3.get())
 
     # check input side is between 0 - 999999
-    if 0 <= side_1 <= 999999 and 0 <= side_2 <= 999999 and 0 <= side_3 <= 999999:
+    if 0 < side_1 <= 999999 and 0 < side_2 <= 999999 and 0 < side_3 <= 999999:
       # show result in Entry widget
       entry_result.delete(0, tk.END)
       entry_result.insert(40, triangle_type(side_1, side_2, side_3))
     else:
-      error_message = "Please enter positive integers between 0 and 999999" # error if input isn't 0 - 999999
+      if side_1 == 0 or side_2 == 0 or side_3 == 0:
+        error_message = " Error, input value is zero" # error if input 0
+      
+      elif side_1 < 0 or side_2 < 0 or side_3 < 0:
+        error_message = " Error, input is negative integers" # error if input is negative integer
+      
+      if side_1 > 999999 or side_2 > 999999 or side_3 > 999999:
+        error_message = " Error, input value exceeds 999999" # error if input value exceeds 999999
+      
       entry_result.delete(0, tk.END)
       entry_result.insert(40, error_message)
-
   except:
-    error_message = "Error! Please enter valid integers" # error if input isn't integer
+    error_message = " Error, input is non-numeric value" # error if input isn't integer or no input or space
     entry_result.delete(0, tk.END)
     entry_result.insert(40, error_message)
 
